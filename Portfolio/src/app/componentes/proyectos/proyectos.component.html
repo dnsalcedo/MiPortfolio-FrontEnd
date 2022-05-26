@@ -1,55 +1,121 @@
 <div *ngIf="load" class="card proyectos">
-    <h5 class="card-header">Proyectos</h5>
-    <div class="card-body" *ngFor="let pro of proyectosList">
-        <div class="card mb-8">
-            <div class="row g-0">
-                <div class="col-md-2 card-image">
-                    <img [src]="pro.imagen" class="img-fluid rounded-start" alt="..." width="200" height="100">
+    <div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-11">
+                    <h5>Proyectos</h5>
                 </div>
-                <div class="col-md-9">
-                    <div class="card-body">
-                        <h5 class="card-title">{{pro.titulo}}</h5>
-                        <p class="card-text"><small class="text-muted">{{pro.inicio}} – {{pro.fin}}</small></p>
-                        <p class="card-text"><small class="text-muted">{{pro.ubicacion}}</small></p>
-                        <p class="card-text">{{pro.descripcion}}</p>
+                <div *ngIf="isLogged()" class="col-1">
+                    <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
+                        (click)="openModalNew(ProyectoModalNew)"></button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" *ngFor="let pro of proyectosList">
+            <div class="card mb-8">
+                <div class="row g-0">
+                    <div class="col-md-2 card-image">
+                        <img [src]="pro.imagen" class="img-fluid rounded-start" alt="..." width="200" height="100">
                     </div>
-                </div>
-                <div *ngIf="isLogged()" class="col-md-1">
-                    <div style="padding: 1rem 0rem 1rem 1rem;">
-                        <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
-                            (click)="openModal(ProyectosModal,pro.id)"></button>
-                        <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
-                            (click)="openModal(ProyectosModal,pro.id)"></button>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{pro.titulo}}</h5>
+                            <p class="card-text"><small class="text-muted">{{pro.inicio}} – {{pro.fin}}</small></p>
+                            <p class="card-text"><small class="text-muted">{{pro.ubicacion}}</small></p>
+                            <p class="card-text">{{pro.descripcion}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="isLogged()" class="col-md-1">
+                        <div style="padding: 1rem 0rem 1rem 1rem;">
+                            <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                                (click)="openModal(ProyectoModalEdit,pro.id)"></button>
+                            <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
+                                (click)="mostrarDialogo(pro.id)"></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <ng-template #ProyectoModalEdit>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Editar proyecto</h4>
+                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="load2">
+                <form [formGroup]="formEdit" (ngSubmit)="actualizarProyecto($event)">
+                    <div class="mb-3">
+                        <input class="form-control" formControlName="id" type="hidden">
+                        <label for="floatingInput" class="form-label"><b>Titulo</b></label>
+                        <input type="text" class="form-control" formControlName="titulo">
+                        <p *ngIf="formEdit.controls['titulo']?.hasError('required')" class="error">El titulo es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Inicio</b></label>
+                        <input type="text" class="form-control" formControlName="inicio">
+                        <p *ngIf="formEdit.controls['inicio']?.hasError('required')" class="error">El inicio es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Fin</b></label>
+                        <input type="text" class="form-control" formControlName="fin">
+                        <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
+                        <input type="text" class="form-control" formControlName="ubicacion">
+                        <p *ngIf="formEdit.controls['ubicacion']?.hasError('required')" class="error">La ubicacion es
+                            requerida.</p>
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción</b></label>
+                        <textarea class="form-control" formControlName="descripcion" rows="14"></textarea>
+                        <p *ngIf="formEdit.controls['descripcion']?.hasError('required')" class="error">La descripcion
+                            es
+                            requerida.</p>
+                        <label for="floatingInput" class="form-label"><b>URL imagen</b></label>
+                        <input type="text" class="form-control" formControlName="imagen">
+                        <input class="form-control" formControlName="usuarios_idusuario"
+                            type="hidden">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </ng-template>
+        <ng-template #ProyectoModalNew>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Crear proyecto</h4>
+                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="load2">
+                <form [formGroup]="formNew" (ngSubmit)="crearProyecto($event)">
+                    <div class="mb-3">
+                        <label for="floatingInput" class="form-label"><b>Titulo</b></label>
+                        <input type="text" class="form-control" formControlName="titulo">
+                        <p *ngIf="formNew.controls['titulo']?.hasError('required')" class="error">El titulo es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Inicio</b></label>
+                        <input type="text" class="form-control" formControlName="inicio">
+                        <p *ngIf="formNew.controls['inicio']?.hasError('required')" class="error">El inicio es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Fin</b></label>
+                        <input type="text" class="form-control" formControlName="fin">
+                        <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
+                        <input type="text" class="form-control" formControlName="ubicacion">
+                        <p *ngIf="formNew.controls['ubicacion']?.hasError('required')" class="error">La ubicacion es
+                            requerida.</p>
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción</b></label>
+                        <textarea class="form-control" formControlName="descripcion" rows="14"></textarea>
+                        <p *ngIf="formNew.controls['descripcion']?.hasError('required')" class="error">La descripcion
+                            es
+                            requerida.</p>
+                        <label for="floatingInput" class="form-label"><b>URL imagen</b></label>
+                        <input type="text" class="form-control" formControlName="imagen">
+                        <input class="form-control" formControlName="usuarios_idusuario"
+                            type="hidden">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            </div>
+        </ng-template>
     </div>
-    <ng-template #ProyectosModal>
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">Editar proyecto</h4>
-            <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" *ngIf="load2">
-            <form>
-                <div class="mb-3">
-                    <label for="floatingInput" class="form-label"><b>Titulo</b></label>
-                    <input type="text" class="form-control" id="titulo" value="{{titulo}}">
-                    <label for="floatingInput" class="form-label"><b>Inicio</b></label>
-                    <input type="text" class="form-control" id="inicio" value="{{inicio}}">
-                    <label for="floatingInput" class="form-label"><b>Fin</b></label>
-                    <input type="text" class="form-control" id="fin" value="{{fin}}">
-                    <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
-                    <input type="text" class="form-control" id="ubicacion" value="{{ubicacion}}">
-                    <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción</b></label>
-                    <textarea class="form-control" id="descripcion" rows="14" value="{{descripcion}}"></textarea>
-                    <label for="floatingInput" class="form-label"><b>URL imagen</b></label>
-                    <input type="text" class="form-control" id="fotoPerfil" value="{{fotoPerfil}}">
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-        </div>
-    </ng-template>
 </div>

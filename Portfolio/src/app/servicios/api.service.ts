@@ -24,7 +24,7 @@ export class ApiService {
     return this.http.get<acercade[]>(this.apiURL + 'informacionpersonal');
   }
 
-  public actualizarInformacionPersonal(body: any): Observable<any>{
+  public actualizarInformacionPersonal(body: any): Observable<any> {
     return this.http.put<any>(this.apiURL + `informacionpersonal`, body);
   }
 
@@ -34,8 +34,20 @@ export class ApiService {
     return this.http.get<conocimientos[]>(this.apiURL + 'conocimientos');
   }
 
-  public obtenerConocimientosID(id: number): Observable<conocimientos> {
+  public obtenerConocimientoID(id: number): Observable<conocimientos> {
     return this.http.get<conocimientos>(this.apiURL + 'conocimiento/' + id);
+  }
+
+  public actualizarConocimiento(body: any) {
+    return this.http.put<any>(this.apiURL + `conocimiento`, body);
+  }
+
+  public eliminarConocimiento(id: number) {
+    return this.http.delete<any>(this.apiURL + `conocimiento/` + id);
+  }
+
+  public crearConocimiento(body: any) {
+    return this.http.post<any>(this.apiURL + `conocimiento`, body);
   }
 
   //Experiencias
@@ -48,15 +60,15 @@ export class ApiService {
     return this.http.get<experiencias>(this.apiURL + 'experiencia/' + id);
   }
 
-  public actualizarExperiencia(body: any){
+  public actualizarExperiencia(body: any) {
     return this.http.put<any>(this.apiURL + `experiencia`, body);
   }
 
-  public eliminarExperiencia(id: number){
+  public eliminarExperiencia(id: number) {
     return this.http.delete<any>(this.apiURL + `experiencia/` + id);
   }
 
-  public crearExperiencia(body: any){
+  public crearExperiencia(body: any) {
     return this.http.post<any>(this.apiURL + `experiencia`, body);
   }
 
@@ -70,6 +82,18 @@ export class ApiService {
     return this.http.get<educacion>(this.apiURL + 'educacion/' + id);
   }
 
+  public actualizarEducacion(body: any) {
+    return this.http.put<any>(this.apiURL + `educacion`, body);
+  }
+
+  public eliminarEducacion(id: number) {
+    return this.http.delete<any>(this.apiURL + `educacion/` + id);
+  }
+
+  public crearEducacion(body: any) {
+    return this.http.post<any>(this.apiURL + `educacion`, body);
+  }
+
   //Proyectos
 
   public obtenerProyectos(): Observable<proyectos[]> {
@@ -80,6 +104,18 @@ export class ApiService {
     return this.http.get<proyectos>(this.apiURL + 'proyecto/' + id);
   }
 
+  public actualizarProyecto(body: any) {
+    return this.http.put<any>(this.apiURL + `proyecto`, body);
+  }
+
+  public eliminarProyecto(id: number) {
+    return this.http.delete<any>(this.apiURL + `proyecto/` + id);
+  }
+
+  public crearProyecto(body: any) {
+    return this.http.post<any>(this.apiURL + `proyecto`, body);
+  }
+
   //Idiomas
 
   public obtenerIdiomas(): Observable<idiomas[]> {
@@ -88,6 +124,18 @@ export class ApiService {
 
   public obtenerIdiomaID(id: number): Observable<idiomas> {
     return this.http.get<idiomas>(this.apiURL + 'idioma/' + id);
+  }
+
+  public actualizarIdioma(body: any) {
+    return this.http.put<any>(this.apiURL + `idioma`, body);
+  }
+
+  public eliminarIdioma(id: number) {
+    return this.http.delete<any>(this.apiURL + `idioma/` + id);
+  }
+
+  public crearIdioma(body: any) {
+    return this.http.post<any>(this.apiURL + `idioma`, body);
   }
 
 }

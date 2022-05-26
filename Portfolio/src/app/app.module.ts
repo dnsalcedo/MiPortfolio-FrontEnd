@@ -15,7 +15,6 @@ import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ConocimientosIdiomaComponent } from './componentes/conocimientos-idioma/conocimientos-idioma.component';
 import { ConocimientosHabilidadesComponent } from './componentes/conocimientos-habilidades/conocimientos-habilidades.component';
-import { ConocimientosComponent } from './componentes/conocimientos/conocimientos.component';
 import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -38,7 +37,6 @@ import { DialogoConfirmacionComponent } from './componentes/dialogo-confirmacion
     HomeComponent,
     ConocimientosIdiomaComponent,
     ConocimientosHabilidadesComponent,
-    ConocimientosComponent,
     DialogoConfirmacionComponent,
   ],
   imports: [

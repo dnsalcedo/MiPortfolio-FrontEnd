@@ -4,11 +4,19 @@
         <div class="card mb-12">
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne"><b>Idiomas</b></button>
-                    </h2>
+                    <div class="row">
+                        <div class="col-11">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne"><b>Idiomas</b></button>
+                            </h2>
+                        </div>
+                        <div *ngIf="isLogged()" class="col-1">
+                            <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
+                                (click)="openModalNew(IdiomaModalNew)" style="margin-top: 12%;margin-left: 40%;"></button>
+                        </div>
+                    </div>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
@@ -49,9 +57,10 @@
                                             <div *ngIf="isLogged()" class="col-md-3">
                                                 <div style="padding: 0rem 0rem 0rem 1rem;">
                                                     <button class="btn btn-primary me-md-2 fas fa-edit editar"
-                                                        type="button" (click)="openModal(IdiomasModal,idi.id)"></button>
+                                                        type="button"
+                                                        (click)="openModalEdit(IdiomaModalEdit,idi.id)"></button>
                                                     <button class="btn btn-primary me-md-2 fas fa-trash-alt editar"
-                                                        type="button" (click)="openModal(IdiomasModal,idi.id)"></button>
+                                                        type="button" (click)="mostrarDialogo(idi.id)"></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,26 +73,75 @@
             </div>
         </div>
     </div>
-    <ng-template #IdiomasModal>
+    <ng-template #IdiomaModalEdit>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">Editar conocimiento o aptitud</h4>
+            <h4 class="modal-title pull-left">Editar idioma</h4>
             <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body" *ngIf="load2">
-            <form>
+            <form [formGroup]="formEdit" (ngSubmit)="actualizarConocimiento($event)">
                 <div class="mb-3">
+                    <input class="form-control" formControlName="id" type="hidden">
                     <label for="floatingInput" class="form-label"><b>Idioma</b></label>
-                    <input type="text" class="form-control" id="nombre" value="{{nombre}}">
-                    <label for="floatingInput" class="form-label"><b>Nivel Escritura</b></label>
-                    <input type="text" class="form-control" id="nivelLectura" value="{{nivelLectura}}}">
-                    <label for="floatingInput" class="form-label"><b>Nivel Conversacion</b></label>
-                    <input type="text" class="form-control" id="nivelEscritura" value="{{nivelEscritura}}">
-                    <label for="floatingInput" class="form-label"><b>Nivel Lectura</b></label>
-                    <input type="text" class="form-control" id="nivelConversacion" value="{{nivelConversacion}}">
+                    <input class="form-control" rows="5" formControlName="nombre">
+                    <p *ngIf="formEdit.controls['nombre']?.hasError('required')" class="error">El idioma es
+                        requerido.</p>
+                    <label for="floatingInput" class="form-label"><b>Nivel de lectura</b></label>
+                    <input class="form-control" rows="5" formControlName="nivelLectura">
+                    <p *ngIf="formEdit.controls['nivelLectura']?.hasError('required')" class="error">El nivel de lectura
+                        es
+                        requerido.</p>
+                    <label for="floatingInput" class="form-label"><b>Nivel de escritura</b></label>
+                    <input class="form-control" rows="5" formControlName="nivelEscritura">
+                    <p *ngIf="formEdit.controls['nivelEscritura']?.hasError('required')" class="error">El nivel de
+                        escritura es requerido.</p>
+                    <label for="floatingInput" class="form-label"><b>Nivel de conversacion</b></label>
+                    <input class="form-control" rows="5" formControlName="nivelConversacion">
+                    <p *ngIf="formEdit.controls['nivelConversacion']?.hasError('required')" class="error">El nivel de
+                        conversacion
+                        es
+                        requerido.</p>
+                    <input class="form-control" formControlName="usuarios_idusuario" type="hidden">
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </ng-template>
+    <ng-template #IdiomaModalNew>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Crear idioma</h4>
+            <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" *ngIf="load2">
+            <form [formGroup]="formNew" (ngSubmit)="crearConocimiento($event)">
+                <div class="mb-3">
+                    <label for="floatingInput" class="form-label"><b>Idioma</b></label>
+                    <input class="form-control" rows="5" formControlName="nombre">
+                    <p *ngIf="formNew.controls['nombre']?.hasError('required')" class="error">El idioma es
+                        requerido.</p>
+                    <label for="floatingInput" class="form-label"><b>Nivel de lectura</b></label>
+                    <input class="form-control" rows="5" formControlName="nivelLectura">
+                    <p *ngIf="formNew.controls['nivelLectura']?.hasError('required')" class="error">El nivel de lectura
+                        es
+                        requerido.</p>
+                    <label for="floatingInput" class="form-label"><b>Nivel de escritura</b></label>
+                    <input class="form-control" rows="5" formControlName="nivelEscritura">
+                    <p *ngIf="formNew.controls['nivelEscritura']?.hasError('required')" class="error">El nivel de
+                        escritura es
+                        requerido.</p>
+                    <label for="floatingInput" class="form-label"><b>Nivel de conversacion</b></label>
+                    <input class="form-control" rows="5" formControlName="nivelConversacion">
+                    <p *ngIf="formNew.controls['nivelConversacion']?.hasError('required')" class="error">El nivel de
+                        conversacion
+                        es
+                        requerido.</p>
+                    <input class="form-control" formControlName="usuarios_idusuario" type="hidden">
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
             </form>
         </div>
     </ng-template>

@@ -1,40 +1,77 @@
 <div class="card coneriencia">
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="card-body" *ngFor="let con of conocimientosList" cdkDrag>
-            <div class="card mb-8">
-                <div class="row g-0">
-                    <div class="col-md-11">
-                        <div class="card-body">
-                            <h5 class="card-title">{{con.texto}}</h5>
+    <div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-11">
+                    <h5>Conocimientos y aptitudes</h5>
+                </div>
+                <div *ngIf="isLogged()" class="col-1">
+                    <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
+                        (click)="openModalNew(ConocimientoModalNew)"></button>
+                </div>
+            </div>
+        </div>
+        <div cdkDropList (cdkDropListDropped)="drop($event)">
+            <div class="card-body" *ngFor="let con of conocimientosList" cdkDrag>
+                <div class="card mb-8">
+                    <div class="row g-0">
+                        <div class="col-md-11">
+                            <div class="card-body">
+                                <h5 class="card-title">{{con.texto}}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="isLogged()" class="col-md-1">
-                        <div style="padding: 1rem 0rem 1rem 1rem;">
-                            <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
-                                (click)="openModal(ConocimientosModal,con.id)"></button>
-                            <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
-                                (click)="openModal(ConocimientosModal,con.id)"></button>
+                        <div *ngIf="isLogged()" class="col-md-1">
+                            <div style="padding: 1rem 0rem 1rem 1rem;">
+                                <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                                    (click)="openModalEdit(ConocimientoModalEdit,con.id)"></button>
+                                <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
+                                    (click)="mostrarDialogo(con.id)"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <ng-template #ConocimientoModalEdit>
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Editar conocimiento o aptitud</h4>
+                    <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" *ngIf="load2">
+                    <form [formGroup]="formEdit" (ngSubmit)="actualizarConocimiento($event)">
+                        <div class="mb-3">
+                            <input class="form-control" formControlName="id" type="hidden">
+                            <label for="floatingInput" class="form-label"><b>Conocimiento</b></label>
+                            <textarea class="form-control" rows="5" formControlName="texto"></textarea>
+                            <p *ngIf="formEdit.controls['texto']?.hasError('required')" class="error">El conocimiento es
+                                requerido.</p>
+                            <input class="form-control" formControlName="usuarios_idusuario" type="hidden">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </ng-template>
+            <ng-template #ConocimientoModalNew>
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Crear conocimiento o aptitud</h4>
+                    <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" *ngIf="load2">
+                    <form [formGroup]="formNew" (ngSubmit)="crearConocimiento($event)">
+                        <div class="mb-3">
+                            <label for="floatingInput" class="form-label"><b>Conocimiento</b></label>
+                            <textarea class="form-control" rows="5" formControlName="texto"></textarea>
+                            <p *ngIf="formNew.controls['texto']?.hasError('required')" class="error">El conocimiento es
+                                requerido.</p>
+                            <input class="form-control" formControlName="usuarios_idusuario" type="hidden">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                    </form>
+                </div>
+            </ng-template>
         </div>
-        <ng-template #ConocimientosModal>
-            <div class="modal-header">
-                <h4 class="modal-title pull-left">Editar conocimiento o aptitud</h4>
-                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" *ngIf="load2">
-                <form>
-                    <div class="mb-3">
-                        <label for="floatingInput" class="form-label"><b>Texto</b></label>
-                        <textarea type="text" class="form-control" rows="5" id="texto" value="{{texto}}"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
-            </div>
-        </ng-template>
     </div>
 </div>

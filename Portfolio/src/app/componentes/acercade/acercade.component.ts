@@ -1,7 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { TokenService } from 'src/app/servicios/token.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { TokenService } from 'src/app/servicios/token.service';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
 import { acercade } from 'src/app/models/acercade';
 
 @Component({
@@ -11,17 +15,25 @@ import { acercade } from 'src/app/models/acercade';
 })
 export class AcercadeComponent implements OnInit {
   load: boolean = false;
+  load2: boolean = false;
   modalRef!: BsModalRef;
-  nombre: String = "";
-  presentacion: String = "";
-  fotoPerfil: String = "";
   personalDataList: acercade[] = [];
+  personalData!: acercade;
+  formEdit!: FormGroup;
 
-
-  constructor(private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService, private toastr: ToastrService, public dialogo: MatDialog) { 
+    this.formEdit = this.formBuilder.group({
+      id: [''],
+      nombre: ['', [Validators.required]],
+      presentacion: ['', [Validators.required]],
+      fotoPerfil: [''],
+      usuarios_idusuario: [''],
+    })
+  }
 
   ngOnInit(): void {
     this.cargarInformacionPersonal();
+    this.load = true;
   }
 
   cargarInformacionPersonal() {
@@ -32,27 +44,42 @@ export class AcercadeComponent implements OnInit {
     })
   }
 
-  actualizarInformacionPersonal(info: acercade) {
-    console.log(info.nombre);
-    console.log(info.presentacion);
-    console.log(info.fotoPerfil);
-  }
-
-  crearInformacionPersonal(info: acercade) {
-    console.log(info.nombre);
-    console.log(info.presentacion);
-    console.log(info.fotoPerfil);
+  actualizarInformacionPersonal(event: Event) {
+    event.preventDefault;
+    this.apiService.actualizarInformacionPersonal(this.formEdit.value).subscribe({
+      next: (data) => {
+        this.modalRef.hide();
+        this.ngOnInit();
+        this.toastr.success('Registro modificado', '', { progressBar: false });
+      },
+      error: (err) => {
+        this.modalRef.hide();
+        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+        this.tokenService.logOutError();
+      }
+    })
   }
 
   isLogged() {
     return this.tokenService.isLogged();
   }
 
-  openModal(InformacionPersonalModal: TemplateRef<any>) {
-    this.nombre = this.personalDataList[0].nombre;
-    this.presentacion = this.personalDataList[0].presentacion;
-    this.fotoPerfil = this.personalDataList[0].fotoPerfil;
-    this.modalRef = this.modalService.show(InformacionPersonalModal);
+  openModalEdit(AcercaDeModalEdit: TemplateRef<any>) {
+    this.apiService.obtenerInformacionPersonal().subscribe({
+      next: info => {
+        this.personalData = info[0];
+        this.formEdit.patchValue({
+          id: this.personalData.id,
+          nombre: this.personalData.nombre,
+          presentacion: this.personalData.presentacion,
+          fotoPerfil: this.personalData.fotoPerfil,
+          usuarios_idusuario: this.personalData.usuarios_idusuario
+        })
+      }
+    })
+    this.load2 = true;
+    this.modalRef = this.modalService.show(AcercaDeModalEdit);
   }
+
 
 }

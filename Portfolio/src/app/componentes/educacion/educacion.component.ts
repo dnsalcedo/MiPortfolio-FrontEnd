@@ -1,7 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { TokenService } from 'src/app/servicios/token.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { TokenService } from 'src/app/servicios/token.service';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion.component';
 import { educacion } from 'src/app/models/educacion';
 
 @Component({
@@ -14,11 +19,32 @@ export class EducacionComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  titulo: String = ""; inicio: String = ""; fin: String = ""; ubicacion: String = ""; descripcion: String = ""; fotoPerfil: String = "";
   educacionList: educacion[] = [];
   educacion!: educacion;
+  formEdit!: FormGroup;
+  formNew!: FormGroup;
 
-  constructor(private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService, private toastr: ToastrService, public dialogo: MatDialog) {
+    this.formEdit = this.formBuilder.group({
+      id: [''],
+      titulo: ['', [Validators.required]],
+      inicio: ['', [Validators.required]],
+      fin: [''],
+      ubicacion: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      imagen: [''],
+      usuarios_idusuario: [''],
+    })
+    this.formNew = this.formBuilder.group({
+      titulo: ['', [Validators.required]],
+      inicio: ['', [Validators.required]],
+      fin: [''],
+      ubicacion: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      imagen: [''],
+      usuarios_idusuario: [''],
+    })
+  }
 
   ngOnInit(): void {
     this.cargaEducacion();
@@ -33,25 +59,97 @@ export class EducacionComponent implements OnInit {
     })
   }
 
+  actualizarEducacion(event: Event) {
+    event.preventDefault;
+    this.apiService.actualizarEducacion(this.formEdit.value).subscribe({
+      next: (data) => {
+        this.modalRef.hide();
+        this.ngOnInit();
+        this.toastr.success('Registro modificado', '', { progressBar: false });
+      },
+      error: (err) => {
+        this.modalRef.hide();
+        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+        this.tokenService.logOutError();
+      }
+    })
+  }
+
+  crearEducacion(event: Event) {
+    event.preventDefault;
+    this.apiService.crearEducacion(this.formNew.value).subscribe({
+      next: (data) => {
+        this.modalRef.hide();
+        this.ngOnInit();
+        this.toastr.success('Registro creado exitosamente', '', { progressBar: false });
+      },
+      error: (err) => {
+        this.modalRef.hide();
+        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+        this.tokenService.logOutError();
+      }
+    })
+  }
+
   isLogged() {
     return this.tokenService.isLogged();
   }
 
-  openModal(EducacionModal: TemplateRef<any>, id: any) {
-    this.titulo = ""; this.inicio = ""; this.fin = ""; this.ubicacion = ""; this.descripcion = ""; this.fotoPerfil = "";
+  openModalEdit(EducacionModalEdit: TemplateRef<any>, id: any) {
     this.apiService.obtenerEducacionID(id).subscribe({
       next: edu => {
         this.educacion = edu;
-        this.titulo = this.educacion.titulo;
-        this.inicio = this.educacion.inicio;
-        this.fin = this.educacion.fin;
-        this.ubicacion = this.educacion.ubicacion;
-        this.descripcion = this.educacion.descripcion;
-        this.fotoPerfil = this.educacion.imagen;
+        this.formEdit.patchValue({
+          id: this.educacion.id,
+          titulo: this.educacion.titulo,
+          inicio: this.educacion.inicio,
+          fin: this.educacion.fin,
+          ubicacion: this.educacion.ubicacion,
+          descripcion: this.educacion.descripcion,
+          imagen: this.educacion.imagen,
+          usuarios_idusuario: this.educacion.usuarios_idusuario
+        })
       }
     })
     this.load2 = true;
-    this.modalRef = this.modalService.show(EducacionModal);
+    this.modalRef = this.modalService.show(EducacionModalEdit);
+  }
+
+  openModalNew(EducacionModalNew: TemplateRef<any>) {
+    this.formNew.patchValue({
+      titulo: "",
+      inicio: "",
+      fin: "",
+      ubicacion: "",
+      descripcion: "",
+      imagen: "",
+      usuarios_idusuario: "1"
+    })
+    this.load2 = true;
+    this.modalRef = this.modalService.show(EducacionModalNew);
+  }
+
+
+  mostrarDialogo(id: any): void {
+    this.dialogo
+      .open(DialogoConfirmacionComponent, {
+        data: `¿Está seguro de que desea eliminar el registro?`
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+          this.apiService.eliminarEducacion(id).subscribe({
+            next: data => {
+              this.ngOnInit();
+            },
+            error: (err) => {
+              this.tokenService.logOutError();
+              this.router.navigate(['/login']);
+              this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+            }
+          })
+        }
+      });
   }
 
 }

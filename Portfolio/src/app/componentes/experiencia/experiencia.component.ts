@@ -22,7 +22,6 @@ export class ExperienciaComponent implements OnInit {
   experiencia!: experiencias;
   formEdit!: FormGroup;
   formNew!: FormGroup;
-  titulo_2: String = "";
 
   constructor(private formBuilder: FormBuilder, private router: Router, private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService, private toastr: ToastrService, public dialogo: MatDialog) {
     this.formEdit = this.formBuilder.group({
@@ -117,7 +116,6 @@ export class ExperienciaComponent implements OnInit {
 
   openModalNew(ExperienciaModalNew: TemplateRef<any>) {
     this.formNew.patchValue({
-      id: "",
       titulo: "",
       inicio: "",
       fin: "",
@@ -144,6 +142,7 @@ export class ExperienciaComponent implements OnInit {
               this.ngOnInit();
             },
             error: (err) => {
+              this.tokenService.logOutError();
               this.router.navigate(['/login']);
               this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
             }
