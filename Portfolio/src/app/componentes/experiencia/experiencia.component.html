@@ -1,0 +1,120 @@
+<div *ngIf="load" class="card experiencia">
+    <div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-11">
+                    <h5>Experiencia</h5>
+                </div>
+                <div *ngIf="isLogged()" class="col-1">
+                    <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button" (click)="openModalNew(ExperienciaModalNew)"></button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" *ngFor="let exp of experienciasList">
+            <div class="card mb-8">
+                <div class="row g-0">
+                    <div class="col-md-2 card-image">
+                        <img [src]="exp.imagen" class="img-fluid rounded-start" alt="..." width="200" height="100">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{exp.titulo}}</h5>
+                            <p class="card-text"><small class="text-muted">{{exp.inicio}} – {{exp.fin}}</small></p>
+                            <p class="card-text"><small class="text-muted">{{exp.ubicacion}}</small></p>
+                            <p class="card-text">{{exp.descripcion}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="isLogged()" class="col-md-1">
+                        <div style="padding: 1rem 0rem 1rem 1rem;">
+                            <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                                (click)="openModalEdit(ExperienciaModalEdit,exp.id)"></button>
+                            <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
+                                (click)="mostrarDialogo(exp.id)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #ExperienciaModalEdit>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Editar experiencia</h4>
+                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="load2">
+                <form [formGroup]="formEdit" (ngSubmit)="actualizarExperiencia($event)">
+                    <div class="mb-3">
+                        <input class="form-control" formControlName="id" type="hidden">
+                        <label for="floatingInput" class="form-label"><b>Titulo</b></label>
+                        <input type="text" class="form-control" formControlName="titulo">
+                        <p *ngIf="formEdit.controls['titulo']?.hasError('required')" class="error">El titulo es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Inicio</b></label>
+                        <input type="text" class="form-control" formControlName="inicio">
+                        <p *ngIf="formEdit.controls['inicio']?.hasError('required')" class="error">El inicio es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Fin</b></label>
+                        <input type="text" class="form-control" formControlName="fin">
+                        <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
+                        <input type="text" class="form-control" formControlName="ubicacion">
+                        <p *ngIf="formEdit.controls['ubicacion']?.hasError('required')" class="error">La ubicacion es
+                            requerida.</p>
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción</b></label>
+                        <textarea class="form-control" formControlName="descripcion" rows="14"></textarea>
+                        <p *ngIf="formEdit.controls['descripcion']?.hasError('required')" class="error">La descripcion
+                            es
+                            requerida.</p>
+                        <label for="floatingInput" class="form-label"><b>URL imagen</b></label>
+                        <input type="text" class="form-control" formControlName="imagen">
+                        <input class="form-control" formControlName="usuarios_idusuario"
+                            type="hidden">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </ng-template>
+        <ng-template #ExperienciaModalNew>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Crear experiencia</h4>
+                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="load2">
+                <form [formGroup]="formNew" (ngSubmit)="crearExperiencia($event)">
+                    <div class="mb-3">
+                        <label for="floatingInput" class="form-label"><b>Titulo</b></label>
+                        <input type="text" class="form-control" formControlName="titulo">
+                        <p *ngIf="formNew.controls['titulo']?.hasError('required')" class="error">El titulo es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Inicio</b></label>
+                        <input type="text" class="form-control" formControlName="inicio">
+                        <p *ngIf="formNew.controls['inicio']?.hasError('required')" class="error">El inicio es
+                            requerido.
+                        </p>
+                        <label for="floatingInput" class="form-label"><b>Fin</b></label>
+                        <input type="text" class="form-control" formControlName="fin">
+                        <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
+                        <input type="text" class="form-control" formControlName="ubicacion">
+                        <p *ngIf="formNew.controls['ubicacion']?.hasError('required')" class="error">La ubicacion es
+                            requerida.</p>
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción</b></label>
+                        <textarea class="form-control" formControlName="descripcion" rows="14"></textarea>
+                        <p *ngIf="formNew.controls['descripcion']?.hasError('required')" class="error">La descripcion
+                            es
+                            requerida.</p>
+                        <label for="floatingInput" class="form-label"><b>URL imagen</b></label>
+                        <input type="text" class="form-control" formControlName="imagen">
+                        <input class="form-control" formControlName="usuarios_idusuario"
+                            type="hidden">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+body {
+    background-color: #f8f8f8;
+}
+
+#wrapper {
+    width: 100%;
+}
+
+#page-wrapper {
+    padding: 0 15px;
+    min-height: 568px;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    #page-wrapper {
+        position: inherit;
+        padding: 0 30px;
+        min-height: 1300px;
+        border-left: 1px solid #e7e7e7;
+    }
+}
+
+.example-list {
+    width: 500px;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .example-box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+.banner{
+    margin-top: 75px;
+	position: relative;
+    background-color: #343a40;
+    background: url(https://i.ibb.co/Xy6jMBp/bg-showcase-1.jpg) no-repeat center center;
+	height: 350px;
+    background-size: cover;
+    border-radius: 40px;
+}
+
+.acerca-de{
+    margin-top: -125px;
+}
+
+.foto-perfil{
+    margin-top: 0px;
+	position: relative;
+    width: 205px;
+    margin-left: 60px;
+}
+
+.foto-perfil img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.informacion{
+    margin-top: 160px;
+	position: relative;
+}
+
+.navbar-izq{
+    display: flex;
+    padding-top: 14px;
+    padding-left: 20px;
+}
+
+.navbar-default{
+   background-color: #00358e;
+   color: white;
+}
+
+.titulo{
+    padding-left: 15px;
+    padding-top: 5px
+}
+
+.btn-social-icon{
+    font-size: 19px;
+    margin-right: 10px;
+    color: white;
+}
+
+.text-center {
+    margin-top: 9px;
+}
+
+.card-image{
+    padding: 25px;
+}
+
+.nombre{
+    font-family: fantasy;
+}
+
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+  }
+
+  .navbar{
+    background-color: #00358e;
+    color: white;
+    margin-top: -13px;
+ }
+
+ p {
+    text-indent: 15px;
+  }

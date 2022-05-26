@@ -1,0 +1,90 @@
+<div *ngIf="load" class="card educacion">
+    <h5 class="card-header"></h5>
+    <div class="card-body">
+        <div class="card mb-12">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                            aria-controls="flush-collapseOne"><b>Idiomas</b></button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div *ngFor="let idi of idiomasList" class="card">
+                                <div class="card-body">
+                                    <div class="col-md-9">
+                                        <div class="row g-0">
+                                            <div class="col-md-9">
+                                                <h5 class="card-title">{{idi.nombre}}</h5>
+                                                <div>
+                                                    <p><strong>Lectura</strong></p>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                            role="progressbar" [style]="idi.nivelLectura"
+                                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p><strong>Escritura</strong></p>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                            role="progressbar" [style]="idi.nivelEscritura"
+                                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p><strong>Conversación</strong></p>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                            role="progressbar" [style]="idi.nivelConversacion"
+                                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="isLogged()" class="col-md-3">
+                                                <div style="padding: 0rem 0rem 0rem 1rem;">
+                                                    <button class="btn btn-primary me-md-2 fas fa-edit editar"
+                                                        type="button" (click)="openModal(IdiomasModal,idi.id)"></button>
+                                                    <button class="btn btn-primary me-md-2 fas fa-trash-alt editar"
+                                                        type="button" (click)="openModal(IdiomasModal,idi.id)"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #IdiomasModal>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Editar conocimiento o aptitud</h4>
+            <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" *ngIf="load2">
+            <form>
+                <div class="mb-3">
+                    <label for="floatingInput" class="form-label"><b>Idioma</b></label>
+                    <input type="text" class="form-control" id="nombre" value="{{nombre}}">
+                    <label for="floatingInput" class="form-label"><b>Nivel Escritura</b></label>
+                    <input type="text" class="form-control" id="nivelLectura" value="{{nivelLectura}}}">
+                    <label for="floatingInput" class="form-label"><b>Nivel Conversacion</b></label>
+                    <input type="text" class="form-control" id="nivelEscritura" value="{{nivelEscritura}}">
+                    <label for="floatingInput" class="form-label"><b>Nivel Lectura</b></label>
+                    <input type="text" class="form-control" id="nivelConversacion" value="{{nivelConversacion}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </ng-template>
+</div>

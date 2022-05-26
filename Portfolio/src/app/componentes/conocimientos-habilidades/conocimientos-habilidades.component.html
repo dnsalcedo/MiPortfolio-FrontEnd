@@ -1,0 +1,40 @@
+<div class="card coneriencia">
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div class="card-body" *ngFor="let con of conocimientosList" cdkDrag>
+            <div class="card mb-8">
+                <div class="row g-0">
+                    <div class="col-md-11">
+                        <div class="card-body">
+                            <h5 class="card-title">{{con.texto}}</h5>
+                        </div>
+                    </div>
+                    <div *ngIf="isLogged()" class="col-md-1">
+                        <div style="padding: 1rem 0rem 1rem 1rem;">
+                            <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                                (click)="openModal(ConocimientosModal,con.id)"></button>
+                            <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
+                                (click)="openModal(ConocimientosModal,con.id)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #ConocimientosModal>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Editar conocimiento o aptitud</h4>
+                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="load2">
+                <form>
+                    <div class="mb-3">
+                        <label for="floatingInput" class="form-label"><b>Texto</b></label>
+                        <textarea type="text" class="form-control" rows="5" id="texto" value="{{texto}}"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </ng-template>
+    </div>
+</div>
