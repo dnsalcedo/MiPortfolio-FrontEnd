@@ -2,12 +2,13 @@
     <div>
         <div class="card-header">
             <div class="row">
-                <div class="col-11">
+                <div class="col-10">
                     <h5>Experiencia</h5>
                 </div>
-                <div *ngIf="isLogged()" class="col-1">
+                <div *ngIf="isLogged()" class="col-2">
                     <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                        (click)="openModalNew(ExperienciaModalNew)"></button>
+                        (click)="openModalNew(ExperienciaModalNew)" style="
+                        margin-left: -2%;"></button>
                 </div>
             </div>
         </div>
@@ -17,7 +18,7 @@
                     <div class="col-md-2 card-image">
                         <img [src]="exp.imagen" class="img-fluid rounded-start" alt="..." width="200" height="100">
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{exp.titulo}}</h5>
                             <p class="card-text"><small class="text-muted">{{exp.inicio}} – {{exp.fin}}</small></p>
@@ -25,12 +26,13 @@
                             <p class="card-text">{{exp.descripcion}}</p>
                         </div>
                     </div>
-                    <div *ngIf="isLogged()" class="col-md-1">
+                    <div *ngIf="isLogged()" class="col-md-2">
                         <div style="padding: 1rem 0rem 1rem 1rem;">
                             <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
                                 (click)="openModalEdit(ExperienciaModalEdit,exp.id)"></button>
                             <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
-                                (click)="mostrarDialogo(exp.id)"></button>
+                                (click)="mostrarDialogo(exp.id)" style="
+                                margin-left: 2%;"></button>
                         </div>
                     </div>
                 </div>
@@ -86,7 +88,7 @@
             <div class="modal-body" *ngIf="load2">
                 <form [formGroup]="formNew" (ngSubmit)="crearExperiencia($event)">
                     <div class="mb-3">
-                        
+
                         <label for="floatingInput" class="form-label"><b>Titulo</b></label>
                         <input type="text" class="form-control" formControlName="titulo">
                         <p *ngIf="formNew.controls['titulo']?.hasError('required')" class="error">El titulo es

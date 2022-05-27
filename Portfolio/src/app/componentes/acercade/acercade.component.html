@@ -5,11 +5,7 @@
                 <img class="img-fluid rounded-circle mb-4" [src]="personal.fotoPerfil">
             </div>
             <div class="col-lg-12 nombre">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h2>{{personal.nombre}}</h2>
-                    </div>
-                </div>
+                <h2>{{personal.nombre}}</h2>
             </div>
         </div>
         <div class="informacion col-lg-8">
@@ -17,7 +13,7 @@
                 <div class="col-lg-10">
                     <p>{{personal.presentacion}}</p>
                 </div>
-                <div *ngIf="isLogged()" class="col-lg-2" style="margin-top: 5px;">
+                <div *ngIf="isLogged()" class="col-lg-2" style="margin-bottom: 6%;">
                     <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
                         (click)="openModalEdit(AcercaDeModalEdit)"></button>
                 </div>

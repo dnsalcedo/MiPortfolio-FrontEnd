@@ -5,17 +5,16 @@
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
                     <div class="row">
-                        <div class="col-11">
+                        <div class="col-10">
                             <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne"><b>Idiomas</b></button>
                             </h2>
                         </div>
-                        <div *ngIf="isLogged()" class="col-1">
+                        <div *ngIf="isLogged()" class="col-2" style="margin-top: 1%;">
                             <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                                (click)="openModalNew(IdiomaModalNew)"
-                                style="margin-top: 12%;margin-left: 40%;"></button>
+                                (click)="openModalNew(IdiomaModalNew)"></button>
                         </div>
                     </div>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -23,7 +22,7 @@
                         <div class="accordion-body">
                             <div *ngFor="let idi of idiomasList" class="card">
                                 <div class="card-body">
-                                    <div class="col-md-9">
+                                    <div class="col-md-10">
                                         <div class="row g-0">
                                             <div class="col-md-9">
                                                 <h5 class="card-title">{{idi.nombre}}</h5>
@@ -59,12 +58,13 @@
                                                 </div>
                                             </div>
                                             <div *ngIf="isLogged()" class="col-md-3">
-                                                <div style="padding: 0rem 0rem 0rem 1rem;">
+                                                <div style="padding: 1rem 0rem 1rem 0rem;">
                                                     <button class="btn btn-primary me-md-2 fas fa-edit editar"
                                                         type="button"
                                                         (click)="openModalEdit(IdiomaModalEdit,idi.id)"></button>
                                                     <button class="btn btn-primary me-md-2 fas fa-trash-alt editar"
-                                                        type="button" (click)="mostrarDialogo(idi.id)"></button>
+                                                        type="button" (click)="mostrarDialogo(idi.id)" style="
+                                                        margin-left: 2%;"></button>
                                                 </div>
                                             </div>
                                         </div>

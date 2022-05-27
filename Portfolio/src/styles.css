@@ -97,14 +97,14 @@ body {
 }
 
 .informacion{
-    margin-top: 160px;
+    margin-top: 13%;
 	position: relative;
 }
 
 .navbar-izq{
     display: flex;
     padding-top: 14px;
-    padding-left: 20px;
+    padding-left: 11px;
 }
 
 .navbar-default{

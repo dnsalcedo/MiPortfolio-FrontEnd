@@ -2,12 +2,13 @@
     <div>
         <div class="card-header">
             <div class="row">
-                <div class="col-11">
+                <div class="col-10">
                     <h5>Educación</h5>
                 </div>
-                <div *ngIf="isLogged()" class="col-1">
+                <div *ngIf="isLogged()" class="col-2">
                     <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                        (click)="openModalNew(EducacionModalNew)"></button>
+                        (click)="openModalNew(EducacionModalNew)" style="
+                        margin-left: -2%;"></button>
                 </div>
             </div>
         </div>
@@ -18,19 +19,20 @@
                         <div class="col-md-2 card-image">
                             <img [src]="edu.imagen" class="img-fluid rounded-start" alt="..." width="200" height="100">
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <div class="card-body">
                                 <p class="card-text"><small class="text-muted">{{edu.inicio}} / {{edu.fin}} </small></p>
                                 <p class="card-text"> {{edu.titulo}}, {{edu.ubicacion}}
                                 </p>
                             </div>
                         </div>
-                        <div *ngIf="isLogged()" class="col-md-1">
+                        <div *ngIf="isLogged()" class="col-md-2">
                             <div style="padding: 1rem 0rem 1rem 1rem;">
                                 <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
                                     (click)="openModalEdit(EducacionModalEdit,edu.id)"></button>
                                 <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
-                                    (click)="mostrarDialogo(edu.id)"></button>
+                                    (click)="mostrarDialogo(edu.id)" style="
+                                    margin-left: 2%;"></button>
                             </div>
                         </div>
                     </div>
@@ -49,13 +51,13 @@
                     <div class="mb-3">
                         <input class="form-control" formControlName="id" type="hidden">
                         <label for="floatingInput" class="form-label"><b>Titulo</b></label>
-                                            <mat-form-field appearance="fill">
-                        <mat-label>Choose a date</mat-label>
-                        <input matInput [matDatepicker]="picker">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker touchUi="true"></mat-datepicker>
-                    </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker touchUi="true"></mat-datepicker>
+                        </mat-form-field>
                         <input type="text" class="form-control" formControlName="titulo">
                         <p *ngIf="formEdit.controls['titulo']?.hasError('required')" class="error">El titulo es
                             requerido.

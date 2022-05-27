@@ -2,12 +2,13 @@
     <div>
         <div class="card-header">
             <div class="row">
-                <div class="col-11">
+                <div class="col-10">
                     <h5>Conocimientos y aptitudes</h5>
                 </div>
-                <div *ngIf="isLogged()" class="col-1">
+                <div *ngIf="isLogged()" class="col-2">
                     <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                        (click)="openModalNew(ConocimientoModalNew)"></button>
+                        (click)="openModalNew(ConocimientoModalNew)" style="
+                        margin-left: -2%;"></button>
                 </div>
             </div>
         </div>
@@ -15,17 +16,18 @@
             <div class="card-body" *ngFor="let con of conocimientosList" cdkDrag>
                 <div class="card mb-8">
                     <div class="row g-0">
-                        <div class="col-md-11">
+                        <div class="col-md-10">
                             <div class="card-body">
                                 <h5 class="card-title">{{con.texto}}</h5>
                             </div>
                         </div>
-                        <div *ngIf="isLogged()" class="col-md-1">
+                        <div *ngIf="isLogged()" class="col-md-2">
                             <div style="padding: 1rem 0rem 1rem 1rem;">
                                 <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
                                     (click)="openModalEdit(ConocimientoModalEdit,con.id)"></button>
                                 <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
-                                    (click)="mostrarDialogo(con.id)"></button>
+                                    (click)="mostrarDialogo(con.id)" style="
+                                    margin-left: 2%;"></button>
                             </div>
                         </div>
                     </div>
