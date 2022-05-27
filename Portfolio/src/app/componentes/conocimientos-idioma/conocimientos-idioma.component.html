@@ -93,18 +93,18 @@
                     <p *ngIf="formEdit.controls['nombre']?.hasError('required')" class="error">El idioma es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de lectura</b></label>
-                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                    <mat-slider class="form-control" min="0" max="100" step="10" color="primary" thumbLabel
                         formControlName="nivelLectura"></mat-slider>
                     <p *ngIf="formEdit.controls['nivelLectura']?.hasError('required')" class="error">El nivel de lectura
                         es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de escritura</b></label>
-                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                    <mat-slider class="form-control" min="0" max="100" step="10" color="primary" thumbLabel
                         formControlName="nivelEscritura"></mat-slider>
                     <p *ngIf="formEdit.controls['nivelEscritura']?.hasError('required')" class="error">El nivel de
                         escritura es requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de conversacion</b></label>
-                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                    <mat-slider class="form-control" min="0" max="100" step="10" color="primary" thumbLabel
                         formControlName="nivelConversacion"></mat-slider>
                     <p *ngIf="formEdit.controls['nivelConversacion']?.hasError('required')" class="error">El nivel de
                         conversacion
@@ -131,20 +131,20 @@
                     <p *ngIf="formNew.controls['nombre']?.hasError('required')" class="error">El idioma es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de lectura</b></label>
-                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                    <mat-slider class="form-control" min="0" max="100" step="10" color="primary" thumbLabel
                         formControlName="nivelLectura"></mat-slider>
                     <p *ngIf="formNew.controls['nivelLectura']?.hasError('required')" class="error">El nivel de lectura
                         es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de escritura</b></label>
-                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                    <mat-slider class="form-control" min="0" max="100" step="10" color="primary" thumbLabel
                         formControlName="nivelEscritura"></mat-slider>
                     <p *ngIf="formNew.controls['nivelEscritura']?.hasError('required')" class="error">El nivel de
                         escritura es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de conversacion</b></label>
-                    <mat-slider id="container-2" class="form-control" min="0" max="100" step="10" thumbLabel
-                        formControlName="nivelConversacion"></mat-slider>
+                    <mat-slider id="container-2" class="form-control" min="0" max="100" step="10" color="primary"
+                        thumbLabel formControlName="nivelConversacion"></mat-slider>
                     <p *ngIf="formNew.controls['nivelConversacion']?.hasError('required')" class="error">El nivel de
                         conversacion
                         es

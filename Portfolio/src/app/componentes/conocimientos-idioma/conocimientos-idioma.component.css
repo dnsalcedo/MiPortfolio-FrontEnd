@@ -17,20 +17,6 @@
   width: 100%;
 }
 
-/* CSS to change 'Primary' color */
-
-::ng-deep .mat-accent .mat-slider-thumb {
-  background-color: blue;
-}
-
-::ng-deep .mat-accent .mat-slider-thumb-label {
-  background-color: blue;
-}
-
-::ng-deep .mat-accent .mat-slider-track-fill {
-  background-color: blue;
-}
-
 .example-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;

@@ -49,6 +49,13 @@
                     <div class="mb-3">
                         <input class="form-control" formControlName="id" type="hidden">
                         <label for="floatingInput" class="form-label"><b>Titulo</b></label>
+                                            <mat-form-field appearance="fill">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker touchUi="true"></mat-datepicker>
+                    </mat-form-field>
                         <input type="text" class="form-control" formControlName="titulo">
                         <p *ngIf="formEdit.controls['titulo']?.hasError('required')" class="error">El titulo es
                             requerido.
