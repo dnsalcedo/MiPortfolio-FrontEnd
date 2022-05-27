@@ -14,7 +14,8 @@
                         </div>
                         <div *ngIf="isLogged()" class="col-1">
                             <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                                (click)="openModalNew(IdiomaModalNew)" style="margin-top: 12%;margin-left: 40%;"></button>
+                                (click)="openModalNew(IdiomaModalNew)"
+                                style="margin-top: 12%;margin-left: 40%;"></button>
                         </div>
                     </div>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -30,7 +31,8 @@
                                                     <p><strong>Lectura</strong></p>
                                                     <div class="progress">
                                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            role="progressbar" [style]="idi.nivelLectura"
+                                                            role="progressbar"
+                                                            [style]="'width: ' + idi.nivelLectura + '%;'"
                                                             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                                         </div>
                                                     </div>
@@ -39,7 +41,8 @@
                                                     <p><strong>Escritura</strong></p>
                                                     <div class="progress">
                                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            role="progressbar" [style]="idi.nivelEscritura"
+                                                            role="progressbar"
+                                                            [style]="'width: ' + idi.nivelEscritura + '%;'"
                                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                                                         </div>
                                                     </div>
@@ -48,7 +51,8 @@
                                                     <p><strong>Conversación</strong></p>
                                                     <div class="progress">
                                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            role="progressbar" [style]="idi.nivelConversacion"
+                                                            role="progressbar"
+                                                            [style]="'width: ' + idi.nivelConversacion + '%;'"
                                                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
                                                         </div>
                                                     </div>
@@ -81,24 +85,27 @@
             </button>
         </div>
         <div class="modal-body" *ngIf="load2">
-            <form [formGroup]="formEdit" (ngSubmit)="actualizarConocimiento($event)">
+            <form [formGroup]="formEdit" (ngSubmit)="actualizarIdioma($event)">
                 <div class="mb-3">
                     <input class="form-control" formControlName="id" type="hidden">
                     <label for="floatingInput" class="form-label"><b>Idioma</b></label>
-                    <input class="form-control" rows="5" formControlName="nombre">
+                    <input class="form-control" formControlName="nombre">
                     <p *ngIf="formEdit.controls['nombre']?.hasError('required')" class="error">El idioma es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de lectura</b></label>
-                    <input class="form-control" rows="5" formControlName="nivelLectura">
+                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                        formControlName="nivelLectura"></mat-slider>
                     <p *ngIf="formEdit.controls['nivelLectura']?.hasError('required')" class="error">El nivel de lectura
                         es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de escritura</b></label>
-                    <input class="form-control" rows="5" formControlName="nivelEscritura">
+                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                        formControlName="nivelEscritura"></mat-slider>
                     <p *ngIf="formEdit.controls['nivelEscritura']?.hasError('required')" class="error">El nivel de
                         escritura es requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de conversacion</b></label>
-                    <input class="form-control" rows="5" formControlName="nivelConversacion">
+                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                        formControlName="nivelConversacion"></mat-slider>
                     <p *ngIf="formEdit.controls['nivelConversacion']?.hasError('required')" class="error">El nivel de
                         conversacion
                         es
@@ -117,24 +124,27 @@
             </button>
         </div>
         <div class="modal-body" *ngIf="load2">
-            <form [formGroup]="formNew" (ngSubmit)="crearConocimiento($event)">
+            <form [formGroup]="formNew" (ngSubmit)="crearIdioma($event)">
                 <div class="mb-3">
                     <label for="floatingInput" class="form-label"><b>Idioma</b></label>
-                    <input class="form-control" rows="5" formControlName="nombre">
+                    <input class="form-control" formControlName="nombre">
                     <p *ngIf="formNew.controls['nombre']?.hasError('required')" class="error">El idioma es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de lectura</b></label>
-                    <input class="form-control" rows="5" formControlName="nivelLectura">
+                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                        formControlName="nivelLectura"></mat-slider>
                     <p *ngIf="formNew.controls['nivelLectura']?.hasError('required')" class="error">El nivel de lectura
                         es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de escritura</b></label>
-                    <input class="form-control" rows="5" formControlName="nivelEscritura">
+                    <mat-slider class="form-control" min="0" max="100" step="10" thumbLabel
+                        formControlName="nivelEscritura"></mat-slider>
                     <p *ngIf="formNew.controls['nivelEscritura']?.hasError('required')" class="error">El nivel de
                         escritura es
                         requerido.</p>
                     <label for="floatingInput" class="form-label"><b>Nivel de conversacion</b></label>
-                    <input class="form-control" rows="5" formControlName="nivelConversacion">
+                    <mat-slider id="container-2" class="form-control" min="0" max="100" step="10" thumbLabel
+                        formControlName="nivelConversacion"></mat-slider>
                     <p *ngIf="formNew.controls['nivelConversacion']?.hasError('required')" class="error">El nivel de
                         conversacion
                         es

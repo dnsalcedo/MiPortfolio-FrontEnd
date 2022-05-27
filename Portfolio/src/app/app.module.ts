@@ -23,6 +23,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogoConfirmacionComponent } from './componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -51,10 +55,17 @@ import { DialogoConfirmacionComponent } from './componentes/dialogo-confirmacion
     ToastrModule.forRoot({ timeOut: 3000, progressBar: true, progressAnimation: 'increasing', preventDuplicates: true }),
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [PortfolioService,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   entryComponents: [
     DialogoConfirmacionComponent

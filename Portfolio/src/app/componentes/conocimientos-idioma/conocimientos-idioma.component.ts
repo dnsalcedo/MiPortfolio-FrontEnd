@@ -22,6 +22,7 @@ export class ConocimientosIdiomaComponent implements OnInit {
   idioma!: idiomas;
   formEdit!: FormGroup;
   formNew!: FormGroup;
+  slider1 = 0;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService, private toastr: ToastrService, public dialogo: MatDialog) {
     this.formEdit = this.formBuilder.group({
@@ -58,7 +59,7 @@ export class ConocimientosIdiomaComponent implements OnInit {
     return this.tokenService.isLogged();
   }
 
-  actualizarConocimiento(event: Event) {
+  actualizarIdioma(event: Event) {
     event.preventDefault;
     this.apiService.actualizarIdioma(this.formEdit.value).subscribe({
       next: (data) => {
@@ -74,7 +75,7 @@ export class ConocimientosIdiomaComponent implements OnInit {
     })
   }
 
-  crearConocimiento(event: Event) {
+  crearIdioma(event: Event) {
     event.preventDefault;
     this.apiService.crearIdioma(this.formNew.value).subscribe({
       next: (data) => {

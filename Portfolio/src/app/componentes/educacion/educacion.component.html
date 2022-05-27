@@ -54,12 +54,12 @@
                             requerido.
                         </p>
                         <label for="floatingInput" class="form-label"><b>Inicio</b></label>
-                        <input type="text" class="form-control" formControlName="inicio">
+                        <input type="date" class="form-control" formControlName="inicio">
                         <p *ngIf="formEdit.controls['inicio']?.hasError('required')" class="error">El inicio es
                             requerido.
                         </p>
                         <label for="floatingInput" class="form-label"><b>Fin</b></label>
-                        <input type="text" class="form-control" formControlName="fin">
+                        <input type="date" class="form-control" formControlName="fin">
                         <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
                         <input type="text" class="form-control" formControlName="ubicacion">
                         <p *ngIf="formEdit.controls['ubicacion']?.hasError('required')" class="error">La ubicacion es
@@ -93,12 +93,12 @@
                             requerido.
                         </p>
                         <label for="floatingInput" class="form-label"><b>Inicio</b></label>
-                        <input type="text" class="form-control" formControlName="inicio">
+                        <input type="date" class="form-control" formControlName="inicio">
                         <p *ngIf="formNew.controls['inicio']?.hasError('required')" class="error">El inicio es
                             requerido.
                         </p>
                         <label for="floatingInput" class="form-label"><b>Fin</b></label>
-                        <input type="text" class="form-control" formControlName="fin">
+                        <input type="date" class="form-control" formControlName="fin">
                         <label for="floatingInput" class="form-label"><b>Ubicacion</b></label>
                         <input type="text" class="form-control" formControlName="ubicacion">
                         <p *ngIf="formNew.controls['ubicacion']?.hasError('required')" class="error">La ubicacion es
