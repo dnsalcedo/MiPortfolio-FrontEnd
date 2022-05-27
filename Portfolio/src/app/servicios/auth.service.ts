@@ -38,4 +38,16 @@ export class AuthService {
 
   };
 
+  chequearLogin() {
+    return this.http.post(this.url + `/estado`, 'body', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }),
+      responseType: "text"
+    }).pipe(map(data => {
+      return (data.toString);
+    }))
+
+  }
+
 }
