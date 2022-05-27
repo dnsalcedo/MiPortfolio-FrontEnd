@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   get Usuario() {
-    return this.form.get("usuario");
+    return this.form.get("user");
   }
 
   get PasswordValid() {

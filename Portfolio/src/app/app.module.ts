@@ -24,9 +24,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogoConfirmacionComponent } from './componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -56,16 +53,10 @@ import {MatInputModule} from '@angular/material/input';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-    MatSliderModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule
+    MatSliderModule
   ],
   providers: [PortfolioService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule
   ],
   entryComponents: [
     DialogoConfirmacionComponent
