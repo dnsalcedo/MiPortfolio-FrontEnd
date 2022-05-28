@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-conocimientos-habilidades',
@@ -20,7 +21,7 @@ export class ConocimientosHabilidadesComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  conocimientosList: conocimientos[] = [];
+  conocimientosList!: Observable<conocimientos[]>;
   conocimiento!: conocimientos;
   formEdit!: FormGroup;
   formNew!: FormGroup;
@@ -43,11 +44,7 @@ export class ConocimientosHabilidadesComponent implements OnInit {
   }
 
   cargarConocimientos() {
-    return this.apiService.obtenerConocimientos().subscribe({
-      next: conocimientos => {
-        this.conocimientosList = conocimientos;
-      }
-    })
+    this.conocimientosList = this.apiService.obtenerConocimientos().pipe();
   }
 
   actualizarConocimiento(event: Event) {

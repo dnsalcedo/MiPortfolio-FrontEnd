@@ -1,5 +1,5 @@
 <div *ngIf="load" class="card proyectos">
-    <div>
+    <div *ngIf="proyectosList | async as proyectos; else noPro">
         <div class="card-header">
             <div class="row">
                 <div class="col-10">
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" *ngFor="let pro of proyectosList">
+        <div class="card-body" *ngFor="let pro of proyectos">
             <div class="card mb-8">
                 <div class="row g-0">
                     <div class="col-md-2 card-image">
@@ -118,4 +118,8 @@
             </div>
         </ng-template>
     </div>
+    <ng-template #noPro>
+        <p-progressSpinner strokeWidth="2" fill="#ffffff" animationDuration="1s"></p-progressSpinner>
+        <h1 class="accent">Cargando...</h1>
+    </ng-template>
 </div>

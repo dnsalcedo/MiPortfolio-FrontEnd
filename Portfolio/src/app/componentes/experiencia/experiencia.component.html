@@ -1,5 +1,5 @@
 <div *ngIf="load" class="card experiencia">
-    <div>
+    <div *ngIf="experienciasList | async as experiencias; else noExp">
         <div class="card-header">
             <div class="row">
                 <div class="col-10">
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" *ngFor="let exp of experienciasList">
+        <div class="card-body" *ngFor="let exp of experiencias">
             <div class="card mb-8">
                 <div class="row g-0">
                     <div class="col-md-2 card-image">
@@ -119,4 +119,8 @@
             </div>
         </ng-template>
     </div>
+    <ng-template #noExp>
+        <p-progressSpinner strokeWidth="2" fill="#ffffff" animationDuration="1s"></p-progressSpinner>
+        <h1 class="accent">Cargando...</h1>
+    </ng-template>
 </div>

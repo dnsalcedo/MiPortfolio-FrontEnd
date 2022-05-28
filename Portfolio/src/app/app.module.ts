@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogoConfirmacionComponent } from './componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatSliderModule } from '@angular/material/slider';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-    MatSliderModule
+    MatSliderModule,
+    ProgressSpinnerModule
   ],
   providers: [PortfolioService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion.component';
 import { idiomas } from 'src/app/models/idiomas';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-conocimientos-idioma',
@@ -18,7 +19,7 @@ export class ConocimientosIdiomaComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  idiomasList: idiomas[] = [];
+  idiomasList!: Observable<idiomas[]>;
   idioma!: idiomas;
   formEdit!: FormGroup;
   formNew!: FormGroup;
@@ -48,12 +49,9 @@ export class ConocimientosIdiomaComponent implements OnInit {
   }
 
   cargarIdiomas() {
-    return this.apiService.obtenerIdiomas().subscribe({
-      next: idiomas => {
-        this.idiomasList = idiomas;
-      }
-    })
+    this.idiomasList = this.apiService.obtenerIdiomas().pipe();
   }
+
 
   isLogged() {
     return this.tokenService.isLogged();

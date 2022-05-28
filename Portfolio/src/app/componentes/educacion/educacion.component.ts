@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion.component';
 import { educacion } from 'src/app/models/educacion';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-educacion',
@@ -19,7 +21,7 @@ export class EducacionComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  educacionList: educacion[] = [];
+  educacionList!: Observable<educacion[]>;
   educacion!: educacion;
   formEdit!: FormGroup;
   formNew!: FormGroup;
@@ -52,11 +54,13 @@ export class EducacionComponent implements OnInit {
   }
 
   cargaEducacion() {
-    return this.apiService.obtenerEducacion().subscribe({
-      next: educacion => {
-        this.educacionList = educacion;
-      }
-    })
+    this.educacionList = this.apiService.obtenerEducacion().pipe(
+      tap(educacion => {
+        educacion.sort((a, b) =>
+          new Date(b.inicio).getTime() - new Date(a.inicio).getTime()
+        );
+      })
+    );
   }
 
   actualizarEducacion(event: Event) {

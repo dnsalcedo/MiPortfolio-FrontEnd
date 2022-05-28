@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion.component';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-experiencia',
@@ -18,7 +20,7 @@ export class ExperienciaComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  experienciasList: experiencias[] = [];
+  experienciasList!: Observable<experiencias[]>;
   experiencia!: experiencias;
   formEdit!: FormGroup;
   formNew!: FormGroup;
@@ -51,11 +53,13 @@ export class ExperienciaComponent implements OnInit {
   }
 
   cargarExperiencias() {
-    return this.apiService.obtenerExperiencias().subscribe({
-      next: experiencias => {
-        this.experienciasList = experiencias;
-      }
-    })
+    this.experienciasList = this.apiService.obtenerExperiencias().pipe(
+      tap(experiencias => {
+        experiencias.sort((a, b) =>
+          new Date(b.inicio).getTime() - new Date(a.inicio).getTime()
+        );
+      })
+    );
   }
 
   actualizarExperiencia(event: Event) {

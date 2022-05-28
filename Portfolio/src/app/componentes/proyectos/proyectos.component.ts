@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-confirmacion.component';
 import { proyectos } from 'src/app/models/proyectos';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-proyectos',
@@ -18,7 +20,7 @@ export class ProyectosComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  proyectosList: proyectos[] = [];
+  proyectosList!: Observable<proyectos[]>;
   proyecto!: proyectos;
   formEdit!: FormGroup;
   formNew!: FormGroup;
@@ -51,11 +53,13 @@ export class ProyectosComponent implements OnInit {
   }
 
   cargarProyectos() {
-    return this.apiService.obtenerProyectos().subscribe({
-      next: proyectos => {
-        this.proyectosList = proyectos;
-      }
-    })
+    this.proyectosList = this.apiService.obtenerProyectos().pipe(
+      tap(proyectos => {
+        proyectos.sort((a, b) =>
+          new Date(b.inicio).getTime() - new Date(a.inicio).getTime()
+        );
+      })
+    );
   }
 
   actualizarProyecto(event: Event) {

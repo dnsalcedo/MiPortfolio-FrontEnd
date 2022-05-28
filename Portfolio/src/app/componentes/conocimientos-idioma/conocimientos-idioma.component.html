@@ -1,6 +1,6 @@
 <div *ngIf="load" class="card educacion">
     <h5 class="card-header"></h5>
-    <div class="card-body">
+    <div class="card-body" *ngIf="idiomasList | async as idiomas; else noIdi">
         <div class="card mb-12">
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
@@ -19,7 +19,7 @@
                         <div id="flush-collapseOne" class="accordion-collapse collapse"
                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
-                                <div *ngFor="let idi of idiomasList" class="card">
+                                <div *ngFor="let idi of idiomas" class="card">
                                     <div class="card-body">
                                         <div class="col-md-10">
                                             <div class="row g-0">
@@ -160,3 +160,8 @@
             </div>
         </ng-template>
     </div>
+    <ng-template #noIdi>
+        <p-progressSpinner strokeWidth="2" fill="#ffffff" animationDuration="1s"></p-progressSpinner>
+        <h1 class="accent">Cargando...</h1>
+    </ng-template>
+</div>

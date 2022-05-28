@@ -1,5 +1,5 @@
 <div class="card coneriencia">
-    <div>
+    <div *ngIf="conocimientosList | async as conocimientos; else noCon">
         <div class="card-header">
             <div class="row">
                 <div class="col-10">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div cdkDropList (cdkDropListDropped)="drop($event)">
-            <div class="card-body" *ngFor="let con of conocimientosList" cdkDrag>
+            <div class="card-body" *ngFor="let con of conocimientos" cdkDrag>
                 <div class="card mb-8">
                     <div class="row g-0">
                         <div class="col-md-10">
@@ -76,4 +76,8 @@
             </ng-template>
         </div>
     </div>
+    <ng-template #noCon>
+        <p-progressSpinner strokeWidth="2" fill="#ffffff" animationDuration="1s"></p-progressSpinner>
+        <h1 class="accent">Cargando...</h1>
+    </ng-template>
 </div>

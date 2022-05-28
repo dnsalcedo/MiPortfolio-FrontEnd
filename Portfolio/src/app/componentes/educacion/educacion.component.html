@@ -1,5 +1,5 @@
 <div *ngIf="load" class="card educacion">
-    <div>
+    <div *ngIf="educacionList | async as educacion; else noEdu">
         <div class="card-header">
             <div class="row">
                 <div class="col-10">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div cdkDropListGroup>
-            <div class="card-body" *ngFor="let edu of educacionList; let i = index" cdkDropList [cdkDropListData]="i">
+            <div class="card-body" *ngFor="let edu of educacion; let i = index" cdkDropList [cdkDropListData]="i">
                 <div class="card mb-8">
                     <div class="row g-0">
                         <div class="col-md-2 card-image">
@@ -119,4 +119,8 @@
             </div>
         </ng-template>
     </div>
+    <ng-template #noEdu>
+        <p-progressSpinner strokeWidth="2" fill="#ffffff" animationDuration="1s"></p-progressSpinner>
+        <h1 class="accent">Cargando...</h1>
+    </ng-template>
 </div>

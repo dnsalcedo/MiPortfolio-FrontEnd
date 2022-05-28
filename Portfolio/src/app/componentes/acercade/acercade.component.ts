@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { acercade } from 'src/app/models/acercade';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-acercade',
@@ -17,11 +18,11 @@ export class AcercadeComponent implements OnInit {
   load: boolean = false;
   load2: boolean = false;
   modalRef!: BsModalRef;
-  personalDataList: acercade[] = [];
+  personalDataList!: Observable<acercade[]>;
   personalData!: acercade;
   formEdit!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService, private toastr: ToastrService, public dialogo: MatDialog) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private tokenService: TokenService, private modalService: BsModalService, private apiService: ApiService, private toastr: ToastrService, public dialogo: MatDialog) {
     this.formEdit = this.formBuilder.group({
       id: [''],
       nombre: ['', [Validators.required]],
@@ -37,11 +38,7 @@ export class AcercadeComponent implements OnInit {
   }
 
   cargarInformacionPersonal() {
-    return this.apiService.obtenerInformacionPersonal().subscribe({
-      next: personalData => {
-        this.personalDataList = personalData;
-      }
-    })
+    this.personalDataList = this.apiService.obtenerInformacionPersonal().pipe();
   }
 
   actualizarInformacionPersonal(event: Event) {

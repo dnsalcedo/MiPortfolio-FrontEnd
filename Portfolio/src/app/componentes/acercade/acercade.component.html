@@ -1,5 +1,5 @@
-<div class="acerca-de">
-    <div class="row" *ngFor="let personal of personalDataList">
+<div class="acerca-de" *ngIf="personalDataList | async as personalData; else noData">
+    <div class="row" *ngFor="let personal of personalData">
         <div class="col-lg-4">
             <div class="foto-perfil col-lg-12">
                 <img class="img-fluid rounded-circle mb-4" [src]="personal.fotoPerfil">
@@ -50,3 +50,7 @@
         </ng-template>
     </div>
 </div>
+<ng-template #noData>
+    <p-progressSpinner strokeWidth="2" fill="#ffffff" animationDuration="1s"></p-progressSpinner>
+    <h1 class="accent">Cargando...</h1>
+</ng-template>
