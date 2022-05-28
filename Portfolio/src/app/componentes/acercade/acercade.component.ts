@@ -28,6 +28,7 @@ export class AcercadeComponent implements OnInit {
       nombre: ['', [Validators.required]],
       presentacion: ['', [Validators.required]],
       fotoPerfil: [''],
+      fotoBanner: [''],
       usuarios_idusuario: [''],
     })
   }
@@ -70,6 +71,7 @@ export class AcercadeComponent implements OnInit {
           nombre: this.personalData.nombre,
           presentacion: this.personalData.presentacion,
           fotoPerfil: this.personalData.fotoPerfil,
+          fotoBanner: this.personalData.fotoBanner,
           usuarios_idusuario: this.personalData.usuarios_idusuario
         })
       }

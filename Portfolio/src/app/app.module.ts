@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './componentes/nav/nav.component';
-import { BannerComponent } from './componentes/banner/banner.component';
 import { AcercadeComponent } from './componentes/acercade/acercade.component';
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
@@ -25,13 +24,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogoConfirmacionComponent } from './componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    BannerComponent,
     AcercadeComponent,
     ExperienciaComponent,
     EducacionComponent,

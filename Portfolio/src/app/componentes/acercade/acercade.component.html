@@ -1,53 +1,63 @@
-<div class="acerca-de" *ngIf="personalDataList | async as personalData; else noData">
-    <div class="row" *ngFor="let personal of personalData">
-        <div class="col-lg-4">
-            <div class="foto-perfil col-lg-12">
-                <img class="rounded-circle mb-4" [src]="personal.fotoPerfil" width="190" height="200">
-            </div>
-            <div class="col-lg-12 nombre">
-                <h2>{{personal.nombre}}</h2>
-            </div>
+<div *ngIf="personalDataList | async as personalData; else noData">
+    <div *ngFor="let personal of personalData">
+        <div class="banner" [style]="'background: url('+ personal.fotoBanner +') no-repeat center center;'">
         </div>
-        <div class="informacion col-lg-8">
+        <div class="acerca-de">
             <div class="row">
-                <div class="col-lg-10">
-                    <p>{{personal.presentacion}}</p>
+                <div class="col-lg-4">
+                    <div class="foto-perfil col-lg-12">
+                        <img class="rounded-circle mb-4" [src]="personal.fotoPerfil" width="190" height="200">
+                    </div>
+                    <div class="col-lg-12 nombre">
+                        <h2>{{personal.nombre}}</h2>
+                    </div>
                 </div>
-                <div *ngIf="isLogged()" class="col-lg-2" style="margin-bottom: 6%;">
-                    <button mat-raised-button matTooltip="Editar" class="btn btn-primary me-md-2 fas fa-edit editar"
-                        type="button" (click)="openModalEdit(AcercaDeModalEdit)"></button>
+                <div class="informacion col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <p>{{personal.presentacion}}</p>
+                        </div>
+                        <div *ngIf="isLogged()" class="col-lg-2" style="margin-bottom: 6%;">
+                            <button mat-raised-button matTooltip="Editar"
+                                class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                                (click)="openModalEdit(AcercaDeModalEdit)"></button>
+                        </div>
+                    </div>
                 </div>
+                <ng-template #AcercaDeModalEdit>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Editar información personal</h4>
+                        <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" *ngIf="load2">
+                        <form [formGroup]="formEdit" (ngSubmit)="actualizarInformacionPersonal($event)">
+                            <div class="mb-3">
+                                <input class="form-control" formControlName="id" type="hidden">
+                                <label for="floatingInput" class="form-label"><b>Nombre</b></label>
+                                <input type="text" class="form-control" formControlName="nombre">
+                                <p *ngIf="formEdit.controls['nombre']?.hasError('required')" class="error">El nombre es
+                                    requerido.
+                                </p>
+                                <label for="exampleFormControlTextarea1" class="form-label"><b>Presentación</b></label>
+                                <textarea class="form-control" formControlName="presentacion" rows="15"></textarea>
+                                <p *ngIf="formEdit.controls['presentacion']?.hasError('required')" class="error">La
+                                    presentación
+                                    es
+                                    requerida.</p>
+                                <label for="floatingInput" class="form-label"><b>URL imagen perfil</b></label>
+                                <input type="text" class="form-control" formControlName="fotoPerfil">
+                                <label for="floatingInput" class="form-label"><b>URL imagen banner</b></label>
+                                <input type="text" class="form-control" formControlName="fotoBanner">
+                                <input class="form-control" formControlName="usuarios_idusuario" type="hidden">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </ng-template>
             </div>
         </div>
-        <ng-template #AcercaDeModalEdit>
-            <div class="modal-header">
-                <h4 class="modal-title pull-left">Editar información personal</h4>
-                <button type="button" class="close pull-right" arial-label="Close" (click)="modalRef.hide()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" *ngIf="load2">
-                <form [formGroup]="formEdit" (ngSubmit)="actualizarInformacionPersonal($event)">
-                    <div class="mb-3">
-                        <input class="form-control" formControlName="id" type="hidden">
-                        <label for="floatingInput" class="form-label"><b>Nombre</b></label>
-                        <input type="text" class="form-control" formControlName="nombre">
-                        <p *ngIf="formEdit.controls['nombre']?.hasError('required')" class="error">El nombre es
-                            requerido.
-                        </p>
-                        <label for="exampleFormControlTextarea1" class="form-label"><b>Presentación</b></label>
-                        <textarea class="form-control" formControlName="presentacion" rows="15"></textarea>
-                        <p *ngIf="formEdit.controls['presentacion']?.hasError('required')" class="error">La presentación
-                            es
-                            requerida.</p>
-                        <label for="floatingInput" class="form-label"><b>URL imagen perfil</b></label>
-                        <input type="text" class="form-control" formControlName="fotoPerfil">
-                        <input class="form-control" formControlName="usuarios_idusuario" type="hidden">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
-            </div>
-        </ng-template>
     </div>
 </div>
 <ng-template #noData>

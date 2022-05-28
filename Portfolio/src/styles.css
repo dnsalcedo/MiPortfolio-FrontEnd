@@ -30,9 +30,9 @@ body {
     background: white;
     border-radius: 4px;
     overflow: hidden;
-  }
-  
-  .example-box {
+}
+
+.example-box {
     padding: 20px 10px;
     border-bottom: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
@@ -44,49 +44,48 @@ body {
     cursor: move;
     background: white;
     font-size: 14px;
-  }
-  
-  .cdk-drag-preview {
+}
+
+.cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
-  
-  .cdk-drag-placeholder {
+        0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
     opacity: 0;
-  }
-  
-  .cdk-drag-animating {
+}
+
+.cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-  .example-box:last-child {
+}
+
+.example-box:last-child {
     border: none;
-  }
-  
-  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-.banner{
+}
+
+.banner {
     margin-top: 75px;
-	position: relative;
+    position: relative;
     background-color: #343a40;
-    background: url(https://i.ibb.co/Xy6jMBp/bg-showcase-1.jpg) no-repeat center center;
-	height: 350px;
+    height: 350px;
     background-size: cover;
     border-radius: 40px;
 }
 
-.acerca-de{
+.acerca-de {
     margin-top: -125px;
 }
 
-.foto-perfil{
+.foto-perfil {
     margin-top: 0px;
-	position: relative;
+    position: relative;
     width: 205px;
     margin-left: 60px;
 }
@@ -96,28 +95,28 @@ body {
     max-height: 200px;
 }
 
-.informacion{
+.informacion {
     margin-top: 13%;
-	position: relative;
+    position: relative;
 }
 
-.navbar-izq{
+.navbar-izq {
     display: flex;
     padding-top: 14px;
     padding-left: 11px;
 }
 
-.navbar-default{
-   background-color: #00358e;
-   color: white;
+.navbar-default {
+    background-color: #00358e;
+    color: white;
 }
 
-.titulo{
+.titulo {
     padding-left: 15px;
     padding-top: 5px
 }
 
-.btn-social-icon{
+.btn-social-icon {
     font-size: 19px;
     margin-right: 10px;
     color: white;
@@ -127,11 +126,11 @@ body {
     margin-top: 9px;
 }
 
-.card-image{
+.card-image {
     padding: 25px;
 }
 
-.nombre{
+.nombre {
     font-family: fantasy;
 }
 
@@ -140,14 +139,14 @@ body {
     top: 8px;
     right: 16px;
     font-size: 18px;
-  }
+}
 
-  .navbar{
+.navbar {
     background-color: #00358e;
     color: white;
     margin-top: -13px;
- }
+}
 
- p {
+p {
     text-indent: 15px;
-  }
+}
