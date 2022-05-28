@@ -12,9 +12,12 @@
                                     aria-controls="flush-collapseOne"><b>Idiomas</b></button>
                             </h2>
                         </div>
-                        <div *ngIf="isLogged()" class="col-2" style="margin-top: 0.7%;margin-left: -0.3%;">
-                            <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                                (click)="openModalNew(IdiomaModalNew)"></button>
+                        <div class="col-2">
+                            <div *ngIf="isLogged()" style="margin-top: 9px;margin-left: -21px;">
+                                <button mat-raised-button matTooltip="Agregar idioma"
+                                    class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
+                                    (click)="openModalNew(IdiomaModalNew)"></button>
+                            </div>
                         </div>
                         <div id="flush-collapseOne" class="accordion-collapse collapse"
                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -59,11 +62,13 @@
                                                     </div>
                                                 </div>
                                                 <div *ngIf="isLogged()" class="col-md-3">
-                                                    <div style="padding: 1rem 0rem 1rem 0rem;">
-                                                        <button class="btn btn-primary me-md-2 fas fa-edit editar"
+                                                    <div style="padding: 1rem 0rem 1rem 0.1rem;">
+                                                        <button mat-raised-button matTooltip="Editar"
+                                                            class="btn btn-primary me-md-2 fas fa-edit editar"
                                                             type="button"
                                                             (click)="openModalEdit(IdiomaModalEdit,idi.id)"></button>
-                                                        <button class="btn btn-primary me-md-2 fas fa-trash-alt editar"
+                                                        <button mat-raised-button matTooltip="Borrar"
+                                                            class="btn btn-primary me-md-2 fas fa-trash-alt editar"
                                                             type="button" (click)="mostrarDialogo(idi.id)" style="
                                                         margin-left: 2%;"></button>
                                                     </div>

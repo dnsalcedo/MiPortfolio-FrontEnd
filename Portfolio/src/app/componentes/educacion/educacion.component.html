@@ -6,9 +6,9 @@
                     <h5>Educación</h5>
                 </div>
                 <div *ngIf="isLogged()" class="col-2">
-                    <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                        (click)="openModalNew(EducacionModalNew)" style="
-                        margin-left: -2%;"></button>
+                    <button mat-raised-button matTooltip="Agregar educación" class="btn btn-primary me-md-2 fas fa-plus-square"
+                        type="button" (click)="openModalNew(EducacionModalNew)" style="
+                        margin-left: -21px;"></button>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="card mb-8">
                     <div class="row g-0">
                         <div class="col-md-2 card-image">
-                            <img [src]="edu.imagen" class="img-fluid rounded-start" alt="..." width="200" height="100">
+                            <img [src]="edu.imagen" class="rounded-start" alt="..." width="200" height="200">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -27,10 +27,12 @@
                             </div>
                         </div>
                         <div *ngIf="isLogged()" class="col-md-2">
-                            <div style="padding: 1rem 0rem 1rem 1rem;">
-                                <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                            <div style="padding: 1rem 0rem 1rem 0.1rem;">
+                                <button mat-raised-button matTooltip="Editar"
+                                    class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
                                     (click)="openModalEdit(EducacionModalEdit,edu.id)"></button>
-                                <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
+                                <button mat-raised-button matTooltip="Borrar"
+                                    class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
                                     (click)="mostrarDialogo(edu.id)" style="
                                     margin-left: 2%;"></button>
                             </div>

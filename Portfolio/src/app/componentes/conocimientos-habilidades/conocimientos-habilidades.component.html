@@ -6,9 +6,9 @@
                     <h5>Conocimientos y aptitudes</h5>
                 </div>
                 <div *ngIf="isLogged()" class="col-2">
-                    <button class="btn btn-primary me-md-2 fas fa-plus-square" type="button"
-                        (click)="openModalNew(ConocimientoModalNew)" style="
-                        margin-left: -2%;"></button>
+                    <button mat-raised-button matTooltip="Agregar conocimiento / aptitud" class="btn btn-primary me-md-2 fas fa-plus-square"
+                        type="button" (click)="openModalNew(ConocimientoModalNew)" style="
+                        margin-left: -21px;"></button>
                 </div>
             </div>
         </div>
@@ -22,10 +22,12 @@
                             </div>
                         </div>
                         <div *ngIf="isLogged()" class="col-md-2">
-                            <div style="padding: 1rem 0rem 1rem 1rem;">
-                                <button class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
+                            <div style="padding: 1rem 0rem 1rem 0.1rem;">
+                                <button mat-raised-button matTooltip="Editar"
+                                    class="btn btn-primary me-md-2 fas fa-edit editar" type="button"
                                     (click)="openModalEdit(ConocimientoModalEdit,con.id)"></button>
-                                <button class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
+                                <button mat-raised-button matTooltip="Borrar"
+                                    class="btn btn-primary me-md-2 fas fa-trash-alt editar" type="button"
                                     (click)="mostrarDialogo(con.id)" style="
                                     margin-left: 2%;"></button>
                             </div>
