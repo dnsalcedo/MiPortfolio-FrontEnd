@@ -10,10 +10,9 @@
                 <div class="text-center">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-social-icon dropdown-toggle fas fa-user"
-                            data-bs-toggle="dropdown" aria-expanded="false"
-                            style="font-size: 23px;">&nbsp;{{userName()}}</button>
+                            data-bs-toggle="dropdown" aria-expanded="false">&nbsp;{{userName()}}</button>
                         <ul class="dropdown-menu">
-                            <li *ngIf="!isLogged()"><a class="dropdown-item" routerLink="/login">Inicia sesión</a></li>
+                            <li *ngIf="!isLogged()"><a class="dropdown-item" routerLink="/login">Iniciar sesión</a></li>
                             <li *ngIf="isLogged()"><a class="dropdown-item" (click)="logOut()" routerLink="">Cerrar
                                     sesión</a></li>
                         </ul>
