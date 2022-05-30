@@ -49,34 +49,42 @@ export class ConocimientosHabilidadesComponent implements OnInit {
 
   actualizarConocimiento(event: Event) {
     event.preventDefault;
-    this.apiService.actualizarConocimiento(this.formEdit.value).subscribe({
-      next: (data) => {
-        this.modalRef.hide();
-        this.ngOnInit();
-        this.toastr.success('Registro modificado', '', { progressBar: false });
-      },
-      error: (err) => {
-        this.modalRef.hide();
-        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
-        this.tokenService.logOutError();
-      }
-    })
+    if (this.formEdit.valid) {
+      this.apiService.actualizarConocimiento(this.formEdit.value).subscribe({
+        next: (data) => {
+          this.modalRef.hide();
+          this.ngOnInit();
+          this.toastr.success('Registro modificado', '', { progressBar: false });
+        },
+        error: (err) => {
+          this.modalRef.hide();
+          this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+          this.tokenService.logOutError();
+        }
+      })
+    } else {
+      this.toastr.error('Error en la validación del formulario. Revisar campos.', '', { progressBar: false });
+    }
   }
 
   crearConocimiento(event: Event) {
     event.preventDefault;
-    this.apiService.crearConocimiento(this.formNew.value).subscribe({
-      next: (data) => {
-        this.modalRef.hide();
-        this.ngOnInit();
-        this.toastr.success('Registro creado exitosamente', '', { progressBar: false });
-      },
-      error: (err) => {
-        this.modalRef.hide();
-        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
-        this.tokenService.logOutError();
-      }
-    })
+    if (this.formNew.valid) {
+      this.apiService.crearConocimiento(this.formNew.value).subscribe({
+        next: (data) => {
+          this.modalRef.hide();
+          this.ngOnInit();
+          this.toastr.success('Registro creado exitosamente', '', { progressBar: false });
+        },
+        error: (err) => {
+          this.modalRef.hide();
+          this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+          this.tokenService.logOutError();
+        }
+      })
+    } else {
+      this.toastr.error('Error en la validación del formulario. Revisar campos.', '', { progressBar: false });
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {

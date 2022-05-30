@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         this.router.navigate(['/login']);
-        this.toastr.error('Login invalido. Verificar usuario y contraseña','ERROR');
+        this.toastr.error('Login invalido. Verificar usuario y contraseña.','ERROR');
       }
     })
   }

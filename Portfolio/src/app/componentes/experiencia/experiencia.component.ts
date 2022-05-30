@@ -64,34 +64,42 @@ export class ExperienciaComponent implements OnInit {
 
   actualizarExperiencia(event: Event) {
     event.preventDefault;
-    this.apiService.actualizarExperiencia(this.formEdit.value).subscribe({
-      next: (data) => {
-        this.modalRef.hide();
-        this.ngOnInit();
-        this.toastr.success('Registro modificado', '', { progressBar: false });
-      },
-      error: (err) => {
-        this.modalRef.hide();
-        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
-        this.tokenService.logOutError();
-      }
-    })
+    if (this.formEdit.valid) {
+      this.apiService.actualizarExperiencia(this.formEdit.value).subscribe({
+        next: (data) => {
+          this.modalRef.hide();
+          this.ngOnInit();
+          this.toastr.success('Registro modificado', '', { progressBar: false });
+        },
+        error: (err) => {
+          this.modalRef.hide();
+          this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+          this.tokenService.logOutError();
+        }
+      })
+    } else {
+      this.toastr.error('Error en la validación del formulario. Revisar campos.', '', { progressBar: false });
+    }
   }
 
   crearExperiencia(event: Event) {
     event.preventDefault;
-    this.apiService.crearExperiencia(this.formNew.value).subscribe({
-      next: (data) => {
-        this.modalRef.hide();
-        this.ngOnInit();
-        this.toastr.success('Registro creado exitosamente', '', { progressBar: false });
-      },
-      error: (err) => {
-        this.modalRef.hide();
-        this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
-        this.tokenService.logOutError();
-      }
-    })
+    if (this.formNew.valid) {
+      this.apiService.crearExperiencia(this.formNew.value).subscribe({
+        next: (data) => {
+          this.modalRef.hide();
+          this.ngOnInit();
+          this.toastr.success('Registro creado exitosamente', '', { progressBar: false });
+        },
+        error: (err) => {
+          this.modalRef.hide();
+          this.toastr.error('Sesión expirada. Vuelva a iniciar sesión.', '', { progressBar: false });
+          this.tokenService.logOutError();
+        }
+      })
+    } else {
+      this.toastr.error('Error en la validación del formulario. Revisar campos.', '', { progressBar: false });
+    }
   }
 
   isLogged() {
