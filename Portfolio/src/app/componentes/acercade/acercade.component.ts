@@ -27,8 +27,8 @@ export class AcercadeComponent implements OnInit {
       id: [''],
       nombre: ['', [Validators.required]],
       presentacion: ['', [Validators.required]],
-      fotoPerfil: [''],
-      fotoBanner: [''],
+      fotoPerfil: ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
+      fotoBanner: ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       usuarios_idusuario: [''],
     })
   }

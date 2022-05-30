@@ -33,7 +33,7 @@ export class ExperienciaComponent implements OnInit {
       fin: [''],
       ubicacion: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
-      imagen: [''],
+      imagen: ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       usuarios_idusuario: [''],
     })
     this.formNew = this.formBuilder.group({
@@ -42,7 +42,7 @@ export class ExperienciaComponent implements OnInit {
       fin: [''],
       ubicacion: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
-      imagen: [''],
+      imagen: ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       usuarios_idusuario: [''],
     })
   }
